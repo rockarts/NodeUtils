@@ -19,21 +19,23 @@ db.serialize(function() {
                 const buffer = readChunk.sync(row.id + '.img', 0, 12);
                 console.log(row.id + '.img');
                 console.log(imageType(buffer));
-                if(imageType(buffer).ext == 'jpg') {
-                    console.log("JPEG!");
-                    fs.rename(row.id + ".img", row.id + ".jpg", function(err) {
-                        if(err) {
-                            return console.log(err);
-                        }
-                    });
-                }
-                if(imageType(buffer).ext == 'png') {
-                    console.log("PNG!");
-                    fs.rename(row.id + ".img", row.id + ".png", function(err) {
-                        if(err) {
-                            return console.log(err);
-                        }
-                    });
+                if(imageType(buffer) != null) {
+                    if(imageType(buffer).ext == 'jpg') {
+                        console.log("JPEG!");
+                        fs.rename(row.id + ".img", row.id + ".jpg", function(err) {
+                            if(err) {
+                                return console.log(err);
+                            }
+                        });
+                    }
+                    if(imageType(buffer).ext == 'png') {
+                        console.log("PNG!");
+                        fs.rename(row.id + ".img", row.id + ".png", function(err) {
+                            if(err) {
+                                return console.log(err);
+                            }
+                        });
+                    }
                 }
             }
         });
